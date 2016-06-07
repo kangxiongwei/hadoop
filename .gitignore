@@ -1,0 +1,8 @@
+*.class
+*.project
+*.eclipse
+.metadata/*
+.recommenders/*
+RemoteSystemsTempFiles/*
+*/bin/*
+.classpath
