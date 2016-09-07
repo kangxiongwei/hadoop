@@ -1,0 +1,13 @@
+hadoop常用命令：
+1.HDFS相关
+1) hadoop fs -copyFromLocal a.txt hdfs://localhost:9000/user
+2) hadoop fs -copyToLocal 
+3) hadoop fs -mkdir book
+4) hadoop fs -lsr /
+5) hadoop distcp hdfs://localhost:9000/user/kangxiongwei hdfs://namenode2/test
+6) hadoop distcp hftp://localhost:50070/user/kangxiongwei hdfs://namenode2/test
+7) hadoop distcp webhdfs://localhost:50070/user/kangxiongwei webhdfs://namenode2:50070/test
+8) hadoop archive -archiveName files.har /my/files /my  //将指定目录下的文件打包成file.har并保存到/my目录下
+9) hadoop fs -ls /my/files.har
+   hadoop fs -lsr har:///my/files.har
+10) hadoop fs -rmr /my/files.har
