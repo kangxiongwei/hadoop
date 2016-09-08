@@ -7,6 +7,8 @@ import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
+import org.apache.hadoop.io.compress.CompressionCodec;
+import org.apache.hadoop.io.compress.GzipCodec;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.Reducer;
@@ -41,9 +43,17 @@ public class MaxTemperature {
 		Job job = new Job(conf);
 		job.setJarByClass(MaxTemperature.class);
 		job.setJobName("max temperature");
+		
+		//对map输出进行压缩
+		conf.setBoolean("mapred.compress.map.output", true);
+		conf.setClass("mapred.map.output.compression.codec", GzipCodec.class, CompressionCodec.class);
 
 		FileInputFormat.addInputPath(job, new Path(args[0]));
 		FileOutputFormat.setOutputPath(job, new Path(args[1]));
+		
+		//压缩reduce输出文件
+		FileOutputFormat.setCompressOutput(job, true);
+		FileOutputFormat.setOutputCompressorClass(job, GzipCodec.class);
 
 		job.setMapperClass(MaxTemperatureMapper.class);
 		job.setReducerClass(MaxTempertureReducer.class);
