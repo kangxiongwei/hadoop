@@ -6,3 +6,6 @@
 RemoteSystemsTempFiles/*
 */bin/*
 .classpath
+classes/
+target/
+.settings/
