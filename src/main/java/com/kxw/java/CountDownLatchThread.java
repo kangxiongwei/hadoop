@@ -1,5 +1,6 @@
 package com.kxw.java;
 
+import java.util.Random;
 import java.util.concurrent.CountDownLatch;
 
 /**
@@ -16,8 +17,12 @@ public class CountDownLatchThread {
                 @Override
                 public void run() {
                     try {
-                        System.out.println(Thread.currentThread().getName() + " is working");
-                    }  finally {
+                        System.out.println(Thread.currentThread().getName() + " is start");
+                        Thread.sleep(new Random().nextInt(1000));
+                        System.out.println(Thread.currentThread().getName() + " is end");
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } finally {
                         LATCH.countDown();
                     }
 
