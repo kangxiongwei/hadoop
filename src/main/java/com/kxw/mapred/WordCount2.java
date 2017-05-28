@@ -24,14 +24,14 @@ public class WordCount2 {
         //使用yarn提交任务
         Configuration conf = new Configuration();
         //本地运行模式，改为yarn为集群模式
-        conf.set("mapreduce.framework.name", "local");
+        conf.set("mapreduce.framework.name", "yarn");
         conf.set("yarn.resourcemanager.hostname", "mini1");
         conf.set("fs.defaultFS", "hdfs://mini1:9000/");
         Job job = Job.getInstance(conf);
 
         //指定jar包所在路径
-        //job.setJarByClass(WordCount2.class);
-        job.setJar("/Users/kangxiongwei/JavaSoft/workspace/hadoop/target/hadoop-0.0.1-SNAPSHOT.jar");
+        job.setJarByClass(WordCount2.class);
+        //job.setJar("/Users/kangxiongwei/JavaSoft/workspace/hadoop/target/hadoop-0.0.1-SNAPSHOT.jar");
         //指定使用的Map和Reduce
         job.setMapperClass(WordMapper.class);
         job.setReducerClass(WordReducer.class);
@@ -55,7 +55,7 @@ public class WordCount2 {
         job.setOutputValueClass(IntWritable.class);
         //指定输入输出路径
         FileInputFormat.setInputPaths(job, new Path("hdfs://mini1:9000/wordcount/input"));
-        FileOutputFormat.setOutputPath(job, new Path("hdfs://mini1:9000/wordcount/output4"));
+        FileOutputFormat.setOutputPath(job, new Path("hdfs://mini1:9000/wordcount/output10"));
         //提交作业
         boolean res = job.waitForCompletion(true);
         System.exit(res ? 0 : 1);

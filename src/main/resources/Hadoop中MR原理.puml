@@ -1,0 +1,18 @@
+@startuml
+Yarn客户端 -> ResourceManager:1.请求运行程序
+ResourceManager -> Yarn客户端:2.返回资源(job.xml,wc.jar,splits.info)的路径..../.staging及applicationId
+Yarn客户端 -> HDFS:3.提交job资源到.../.staging/applicationId/job.xml,wc.jar,splits.info
+Yarn客户端 -> ResourceManager:4.通知RM提交完毕
+ResourceManager --> ResourceManager:5.请求封装成Task，准备运算资源，将Task放入调度池队列
+ResourceManager -> NodeManagerA:6.领取任务，分配Container，包含CPU、RAM，形成MRAppMaster
+Yarn客户端 -> NodeManagerA:7.启动MRAppMaster
+NodeManagerA -> ResourceManager:8.请求运行MapTask的资源
+ResourceManager -> NodeManagerB:9.节点领取到任务,当前节点为YarnChild
+ResourceManager -> NodeManagerC:9.节点领取到任务,当前节点为YarnChild
+NodeManagerB --> NodeManagerB:10.MapTask任务输出到文件par_0,par_1等
+NodeManagerC --> NodeManagerC:10.MapTask任务输出到文件par_0,par_1等
+NodeManagerA -> NodeManagerD:11.启动ReduceTask,当前节点为YarnChild
+NodeManagerD -> NodeManagerB:12.获取MapTask的输出文件，par_0,par_1等
+NodeManagerD -> NodeManagerC:12.获取MapTask的输出文件，par_0,par_1等
+NodeManagerD -> HDFS:写出ReduceTask的计算结果
+@enduml

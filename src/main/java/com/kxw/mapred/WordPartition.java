@@ -7,6 +7,7 @@ import org.apache.hadoop.mapreduce.Partitioner;
 import java.util.HashMap;
 
 /**
+ * 自定义分区
  * Created by kangxiongwei on 2017/5/27.
  */
 public class WordPartition extends Partitioner<Text, IntWritable> {
