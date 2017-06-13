@@ -9,7 +9,7 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class LockThread {
 
-    static Lock lock = new ReentrantLock();
+    static ReentrantLock lock = new ReentrantLock();
     static Condition condition = lock.newCondition();
     static int a = 0;
 

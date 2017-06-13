@@ -19,7 +19,12 @@ public class TestThreadPool {
 
         List<Future<String>> futureList = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
-            Future<String> future = service.submit(() -> Thread.currentThread().getName() + " is working");
+            Future<String> future = service.submit(new Callable<String>() {
+                @Override
+                public String call() throws Exception {
+                    return Thread.currentThread().getName() + " is working";
+                }
+            });
             futureList.add(future);
         }
 

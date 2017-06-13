@@ -15,12 +15,15 @@ public class ExampleZkClient {
 
     private static void init() throws IOException {
         String connectString = "127.0.0.1:2181";
-        zkClient = new ZooKeeper(connectString, 2000, watchedEvent -> {
-            try {
-                System.out.println(watchedEvent.getState() + "-" + watchedEvent.getPath());
-                zkClient.getChildren("/", true);
-            } catch (Exception e) {
-                e.printStackTrace();
+        zkClient = new ZooKeeper(connectString, 2000, new Watcher() {
+            @Override
+            public void process(WatchedEvent watchedEvent) {
+                try {
+                    System.out.println(watchedEvent.getState() + "-" + watchedEvent.getPath());
+                    zkClient.getChildren("/", true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
@@ -35,7 +38,9 @@ public class ExampleZkClient {
         System.out.println(stat);
         //获取节点
         List<String> list = zkClient.getChildren("/", true);
-        list.forEach(System.out::println);
+        for (String key: list) {
+            System.out.println(key);
+        }
         //删除节点，-1表示删除所有的版本
         zkClient.delete("/app10000000003", -1);
     }

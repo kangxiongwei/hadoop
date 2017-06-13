@@ -28,8 +28,6 @@ public class JdbcTest {
         rs.close();
         ps.close();
         connection.close();
-
-        list.forEach(System.out::println);
     }
 
 

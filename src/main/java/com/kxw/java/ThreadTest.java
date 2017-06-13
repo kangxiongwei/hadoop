@@ -14,12 +14,12 @@ public class ThreadTest {
         ExecutorService es4 = Executors.newScheduledThreadPool(5);
         ExecutorService es5 = Executors.newSingleThreadScheduledExecutor();
 
-        es1.execute(() -> System.out.println("hello thread pool"));
+        //es1.execute(() -> System.out.println("hello thread pool"));
 
 
 
 
-        ThreadPoolExecutor executor = new ThreadPoolExecutor(1, 1, 0, TimeUnit.SECONDS, new LinkedBlockingDeque<>());
+        //ThreadPoolExecutor executor = new ThreadPoolExecutor(1, 1, 0, TimeUnit.SECONDS, new LinkedBlockingDeque<>());
     }
 
 
