@@ -36,13 +36,13 @@ public class FileSink extends AbstractSink implements Configurable {
             if (event != null) break;
         }
         try {
-            logger.debug("Get event.");
             String body = new String(event.getBody());
-            System.out.println("event.getBody()-----" + body);
+            System.out.println("收集到数据" + body);
+
             String res = body + ":" + System.currentTimeMillis() + "\r\n";
 
             File file = new File(fileName);
-            FileOutputStream fos = new FileOutputStream(file, true);;
+            FileOutputStream fos = new FileOutputStream(file, true);
             fos.write(res.getBytes());
 
             fos.close();
