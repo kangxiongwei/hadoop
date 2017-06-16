@@ -14,7 +14,7 @@ public class ExampleZkClient {
     private static ZooKeeper zkClient;
 
     private static void init() throws IOException {
-        String connectString = "127.0.0.1:2181";
+        String connectString = "10.180.153.155:2181";
         zkClient = new ZooKeeper(connectString, 2000, new Watcher() {
             @Override
             public void process(WatchedEvent watchedEvent) {
@@ -32,9 +32,9 @@ public class ExampleZkClient {
     public static void main(String[] args) throws IOException, KeeperException, InterruptedException {
         init();
         //创建节点
-        zkClient.create("/app1", "hello zk".getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
+        zkClient.create("/app", "hello zk".getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
         //判断是否存在
-        Stat stat = zkClient.exists("/app1", true);
+        Stat stat = zkClient.exists("/app", true);
         System.out.println(stat);
         //获取节点
         List<String> list = zkClient.getChildren("/", true);
@@ -42,7 +42,7 @@ public class ExampleZkClient {
             System.out.println(key);
         }
         //删除节点，-1表示删除所有的版本
-        zkClient.delete("/app10000000003", -1);
+        //zkClient.delete("/app10000000003", -1);
     }
 
 }
