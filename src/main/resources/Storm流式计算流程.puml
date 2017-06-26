@@ -1,0 +1,11 @@
+@startuml
+业务系统-->Flume集群:产生日志
+Flume集群-->Kafka集群:收集日志
+Kafka集群-->Storm集群:实时计算
+Storm集群-->Redis集群:缓存计算结果
+@enduml
+
+@startuml
+数据源-->spout:获取外部数据String,Json,JavaBean等
+spout-->bolt:内部发送
+@enduml
