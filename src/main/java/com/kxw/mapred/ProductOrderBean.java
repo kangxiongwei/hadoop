@@ -1,6 +1,7 @@
 package com.kxw.mapred;
 
 import org.apache.hadoop.io.Writable;
+import org.apache.hadoop.io.WritableComparable;
 
 import java.io.DataInput;
 import java.io.DataOutput;
@@ -10,7 +11,7 @@ import java.io.IOException;
  * 自定义Bean,实现序列化
  * Created by kangxiongwei on 2017/5/28.
  */
-public class ProductOrderBean implements Writable {
+public class ProductOrderBean implements WritableComparable<ProductOrderBean> {
 
     private Integer id = 0; //订单编号
     private String createDate = ""; //下单日期
@@ -126,6 +127,11 @@ public class ProductOrderBean implements Writable {
         categaryId = dataInput.readInt();
         price = dataInput.readFloat();
         flag = dataInput.readInt();
+    }
+
+    @Override
+    public int compareTo(ProductOrderBean o) {
+        return 0;
     }
 
     @Override
